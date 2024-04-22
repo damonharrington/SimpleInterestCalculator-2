@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Interest Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        .container {
+            background-color: #c7e1ff; /* light blue background color */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        form .form-group {
+            margin-bottom: 15px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4a95e4; 
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body style="background-color: #c7e1ff;">
+    <div class="container">
+        <h1>Simple Interest Calculator</h1>
+        <h5 style="align-items: end; font-size: small;">Developed by Damon Adonis Harrington 22112037</h5>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="principal">Principal</label>
+                <input type="text" id="principal" name="principal" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="rate">Rate (%)</label>
+                <input type="text" id="rate" name="rate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="time">Time</label>
+                <input type="text" id="time" name="time" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+
+        <h2>Calculation History</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Principal</th>
+                    <th>Rate</th>
+                    <th>Time</th>
+                    <th>Interest</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for calculation in calculations %}
+                <tr>
+                    <td>{{ calculation.principal }}</td>
+                    <td>{{ calculation.rate }}%</td>
+                    <td>{{ calculation.time }}</td>
+                    <td>{{ calculation.result }}</td>
+                    <td>{{ calculation.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
